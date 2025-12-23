@@ -2,11 +2,3 @@ transformers==4.50.0
 trl==0.16.0
 pytorch==2.6.0
 flash-attn==2.7.4.post1
-
-
-/data/miniconda3/envs/openmllm/lib/python3.10/site-packages/transformers/models/qwen2_vl/image_processing_qwen2_vl.py
-if 'max_pixels' in size and 'min_pixels' in size:
-    size = {"shortest_edge": size['min_pixels'], "longest_edge": size['max_pixels']}
-
-export PATH=/usr/local/cuda-12.4/bin:$PATH
-export LD_LIBRARY_PATH=/usr/local/cuda-12.4/lib64:$LD_LIBRARY_PATH
