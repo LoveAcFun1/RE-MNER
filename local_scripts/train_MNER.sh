@@ -1,5 +1,5 @@
 #!/bin/bash
-# ps -ef | grep keepworking_v4 | awk '{print$2}' | xargs kill -9
+
 export NCCL_BLOCKING_WAIT=0
 export TOKENIZERS_PARALLELISM=false
 export OMP_NUM_THREADS=8
@@ -50,10 +50,10 @@ torchrun --nproc_per_node=8 \
     --master_addr=127.0.0.1 \
     --master_port=12347 \
     src/open_r1/grpo.py \
-    --deepspeed /group/40064/johnbli/Code/Deepseek/open-r1-multimodal/local_scripts/zero3.json \
-    --output_dir checkpoints/Qwen2-VL-7B-cold-0.4-continue-cold-segreward-all \
-    --model_name_or_path /group/40064/johnbli/saved_models/MNER/Qwen2-VL-7B-cold-0.4 \
-    --dataset_name /group/40064/johnbli/Data/GMNER/data/train_2015_2017_0.4.json \
+    --deepspeed local_scripts/zero3.json \
+    --output_dir {output_dir} \
+    --model_name_or_path {model_path} \
+    --dataset_name {your_dataset_path} \
     --max_prompt_length 8192 \
     --per_device_train_batch_size 1 \
     --gradient_accumulation_steps 1 \
@@ -68,7 +68,4 @@ torchrun --nproc_per_node=8 \
     --num_train_epochs 2 \
     --num_generations 8 \
     --run_name $WANDB_RUN_NAME \
-    &> logs/Qwen2-VL-7B-cold-0.4-continue-cold-segreward-all.log
 
-
-# nohup python /group/40064/johnbli/Code/keepworking_v4/run.py &
